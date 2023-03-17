@@ -7,41 +7,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <div class="container-fluid">
         <h2 class="mt-5 mb-5 text-center">Product Management System</h2>
-    </div>
+   
 
     <div class="container border border-dark rounded-3 p-5">
-        <form id="details">
+        <form id="details" enctype="multipart/form-data">
             <div class="mb-3">
               <label for="" class="form-label">Product ID</label>
-              <input type="text" class="form-control" id="id">
+              <input type="number" class="form-control" id="id" name="id" placeholder="Product ID">
             </div>
             <div class="mb-3">
               <label for="" class="form-label">Product Name</label>
-              <input type="text" class="form-control" id="pname">
+              <input type="text" class="form-control" id="pname" name="pname" placeholder="Product Name">
             </div>
             <div class="mb-3">
               <label for="" class="form-label">Image</label>
-              <input type="file" class="form-control" id="photo">
+              <input type="file" class="form-control" id="image" name="pimage" accept="image/*">
             </div>
             <div class="mb-3">
               <label for="" class="form-label">Price</label>
-              <input type="number" class="form-control" id="price">
+              <input type="number" class="form-control" id="price" name="price" placeholder="Product Price">
             </div>
             <div class="mb-3">
               <label for="" class="form-label">Description</label>
-              <input type="email" class="form-control" id="">
+              <input type="text" class="form-control" id="pdesc" placeholder="Enter description">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-primary" onclick="addData()">Add Product</button>
         </form>
     </div>
 
     <div class="container">
+        <h2 class="mt-5 text-center">Product List</h2>
+        <div class="row">
+          <div class="col-sm-12 col-md-8"><input type="text" class="form-control" id="search" placeholder="Search product"></div>
+          <div class="col-sm-12 col-md-4">
+            <select class="form-select" onchange="sortProduct()" id="sorting">
+              <option selected disabled>Sort By</option>
+              <option value="p_id">Product id</option>
+              <option value="p_name">Product Name</option>
+              <option value="p_price">Price</option>
+            </select>
+          </div>
+        </div>
         <div class="row">
             <div class="col">
                 <table class="mt-5 table text-center" id="crudTable">
@@ -55,11 +67,52 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody id="product-list">
+                    <tbody id="productList">
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editModalLabel">Update Product</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="details" enctype="multipart/form-data">
+                    <div class="mb-3">
+                      <label for="" class="form-label">Product ID</label>
+                      <input type="number" class="form-control" id="modal_id" name="id">
+                    </div>
+                    <div class="mb-3">
+                      <label for="" class="form-label">Product Name</label>
+                      <input type="text" class="form-control" id="modal_pname" name="pname">
+                    </div>
+                    <div class="mb-3">
+                      <label for="" class="form-label">Image</label>
+                      <input type="file" class="form-control" id="modal_image" name="pimage" accept="image/*">
+                    </div>
+                    <div class="mb-3">
+                      <label for="" class="form-label">Price</label>
+                      <input type="number" class="form-control" id="modal_price" name="price">
+                    </div>
+                    <div class="mb-3">
+                      <label for="" class="form-label">Description</label>
+                      <input type="text" class="form-control" id="modal_pdesc">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="save" onclick="editData()">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
