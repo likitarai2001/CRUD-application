@@ -1,0 +1,9 @@
+.customInputFile{
+    width:100px;
+    color:transparent;
+    display: inline-block;
+  }
+  
+.customInputFileLabel{
+    display: block;
+}
